@@ -1,6 +1,6 @@
-### Roadmap do Projeto de Power BI - Universidade
+# Roadmap do Projeto de Power BI - Universidade
 
-## Este roadmap fornece uma visão clara e estruturada das etapas necessárias para a construção de um relatório completo no Power BI, aplicável a contextos universitários. Cada módulo representa uma fase do projeto, com tarefas específicas para garantir qualidade, consistência e performance na análise de dados.
+### Este roadmap fornece uma visão clara e estruturada das etapas necessárias para a construção de um relatório completo no Power BI, aplicável a contextos universitários. Cada módulo representa uma fase do projeto, com tarefas específicas para garantir qualidade, consistência e performance na análise de dados.
 
 Módulo 1: Extração de Dados
 
