@@ -35,6 +35,30 @@ GROUP BY faixa_renda
 -- preencha com a população média (geral) das cidades do Brasil
 
 
+SELECT * FROM temp_tables.regions LIMIT 10;
+
+SELECT 
+    *, 
+	CASE 
+	     WHEN  population IS NOT NULl THEN  population 
+		 ELSE ( SELECT AVG(population) FROM temp_tables.regions) 
+		 END AS population_ajustada
+
+FROM temp_tables.regions
+WHERE population IS NULL 	 
+
+-- AGORA VAMOS ADAPTAR O COMANDO COALESCE -- 
+
+-- opção 2
+
+SELECT 
+    *, 
+     COALESCE(population, (SELECT AVG(population) FROM temp_tables.regions)) AS populacao_ajustada
+
+FROM temp_tables.regions 
+WHERE population IS NULL 	
+
+
 -- RESUMO ##########################################################################
 -- (1) CASE WHEN é o comando utilizado para criar respostas específicas para 
 -- diferentes condições e é muito utilizado para fazer agrupamento de dados
