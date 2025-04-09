@@ -2,13 +2,11 @@
 -- CASE WHEN
 -- COALESCE()
 
-
 -- EXEMPLOS ########################################################################
 
 -- (Exemplo 1) Agrupamento de dados com CASE WHEN
 -- Calcule o nº de clientes que ganham abaixo de 5k, entre 5k e 10k, entre 10k e 
 -- 15k e acima de 15k
-
 
 SELECT * FROM sales.customers LIMIT 10; 
 
@@ -34,7 +32,6 @@ GROUP BY faixa_renda
 -- preencha com os dados da coluna population, mas caso esse campo estiver nulo, 
 -- preencha com a população média (geral) das cidades do Brasil
 
-
 SELECT * FROM temp_tables.regions LIMIT 10;
 
 SELECT 
@@ -57,7 +54,6 @@ SELECT
 
 FROM temp_tables.regions 
 WHERE population IS NULL 	
-
 
 -- RESUMO ##########################################################################
 -- (1) CASE WHEN é o comando utilizado para criar respostas específicas para 
