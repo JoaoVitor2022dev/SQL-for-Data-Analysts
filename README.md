@@ -1,73 +1,113 @@
-# Roadmap do Projeto de Power BI - Universidade
+# 📚 Curso de PostgreSQL — Consultas Complexas
 
-### Este roadmap fornece uma visão clara e estruturada das etapas necessárias para a construção de um relatório completo no Power BI, aplicável a contextos universitários. Cada módulo representa uma fase do projeto, com tarefas específicas para garantir qualidade, consistência e performance na análise de dados.
+## ✨ Sobre o Curso
 
-Módulo 1: Extração de Dados
+Este curso é focado no desenvolvimento de habilidades avançadas em **consultas SQL** usando o **PostgreSQL**.  
+Exploramos conceitos fundamentais e avançados para trabalhar com bancos de dados relacionais, focando principalmente em:
 
-Realizar a importação dos dados utilizando o Power Query.
+- Joins (INNER, LEFT, RIGHT, FULL)
+- Subqueries (correlacionadas e não correlacionadas)
+- CTEs (Common Table Expressions)
+- Agrupamentos e Funções de Agregação
+- Filtragem Avançada
+- Ordenações e Paginação de Resultados
+- Manipulação e Otimização de Consultas Complexas
 
-Módulo 2: Transformação de Dados (Power Query)
+O objetivo é capacitar a construção de consultas robustas e performáticas para aplicações reais.
 
-Ajustar os tipos de dados das colunas (ex: converter texto, número, data conforme necessário).
+---
 
-Criar uma tabela de dimensão para Curso:
+## 🧩 Conteúdo Abordado
 
-Remover duplicatas
+### 📌 1. Revisão de Fundamentos SQL
+- Estrutura de um banco de dados relacional
+- Comandos básicos: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+- Tipos de dados no PostgreSQL
 
-Manter apenas colunas relevantes
+### 📌 2. Trabalhando com JOINs
+- **INNER JOIN**: Retorna apenas registros com correspondência em ambas as tabelas.
+- **LEFT JOIN**: Retorna todos os registros da tabela da esquerda, e correspondentes da tabela da direita (ou NULL).
+- **RIGHT JOIN**: Retorna todos os registros da tabela da direita.
+- **FULL JOIN**: Retorna registros combinados de ambas as tabelas.
 
-Criar outras tabelas de dimensão com base nas colunas da tabela fato, conforme estrutura de modelagem Fato-Dimensão.
+#### Exemplos:
+```sql
+-- INNER JOIN
+SELECT a.nome, b.endereco
+FROM clientes a
+INNER JOIN pedidos b ON a.id_cliente = b.id_cliente;
 
-Módulo 3: Modelagem de Dados
+-- LEFT JOIN
+SELECT a.nome, b.endereco
+FROM clientes a
+LEFT JOIN pedidos b ON a.id_cliente = b.id_cliente;
 
-Analisar e compreender o relacionamento entre as tabelas.
 
-Estabelecer relacionamentos entre fatos e dimensões de forma correta.
+-- Subquery simples
+SELECT nome
+FROM produtos
+WHERE id_categoria = (SELECT id FROM categorias WHERE nome = 'Eletrônicos');
 
-Módulo 4: Construção do Relatório (Exibição)
 
-4.1 Layout e Design
+-- Subquery correlacionada
+SELECT nome
+FROM produtos p
+WHERE preco > (SELECT AVG(preco) FROM produtos WHERE id_categoria = p.id_categoria);
 
-Inserir imagens de fundo específicas para diferentes áreas do relatório (Aluno, Campus, Financeiro etc.).
 
-Aplicar paleta de cores e estilos visuais consistentes.
+WITH vendas_totais AS (
+  SELECT id_cliente, SUM(valor) AS total
+  FROM vendas
+  GROUP BY id_cliente
+)
+SELECT c.nome, v.total
+FROM clientes c
+JOIN vendas_totais v ON c.id_cliente = v.id_cliente;
 
-4.2 Criação de Medidas (DAX)
 
-Criar medidas específicas para análise financeira e institucional:
+SELECT id_categoria, COUNT(*) AS total_produtos
+FROM produtos
+GROUP BY id_categoria
+HAVING COUNT(*) > 10;
 
-Exemplo: FAT_INADIMPLENTE = SOMASE(Inadimplente)
+SELECT nome, preco,
+CASE
+  WHEN preco < 50 THEN 'Barato'
+  WHEN preco BETWEEN 50 AND 150 THEN 'Médio'
+  ELSE 'Caro'
+END AS categoria_preco
+FROM produtos
+ORDER BY preco ASC
+LIMIT 10 OFFSET 20;
+```
 
-Organizar as medidas em pastas, como "Financeiro", "Acadêmico" e "Demográfico".
+ 
+🛠️ Tecnologias e Ferramentas Utilizadas
+PostgreSQL 15+
 
-4.3 Construção de Gráficos
+pgAdmin 4
 
-Gráfico de barras para inadimplência por curso:
+DBeaver (opcional)
 
-Eixo Y: Cursos
+VSCode com extensão SQL Tools (opcional)
 
-Eixo X: FAT_INADIMPLENTE
+📈 Principais Aprendizados
+Modelar e consultar bancos relacionais de forma eficiente
 
-Aplicar visual clean e moderno para facilitar a leitura e apresentação dos dados.
+Construir consultas aninhadas para resolver problemas complexos
 
-Módulo 5: Revisão e Ajustes Finais
+Otimizar JOINs para grandes volumes de dados
 
-Revisar a disposição visual e a performance do relatório.
+Utilizar CTEs para melhorar a clareza das consultas
 
-Verificar interações, filtros e segmentações.
+Dominar filtros e agregações para relatórios e análises de dados
 
-Corrigir eventuais inconsistências no layout.
+🚀 Próximos Passos
 
-Módulo 6: Análises Avançadas e Otimizações
+Praticar consultas em bases de dados reais (ex: Northwind, AdventureWorks)
 
-Corrigir tipos de colunas mal configuradas (ex: converter a coluna Idade de texto para número).
+Avançar para temas como Índices, Views, Stored Procedures e Tuning de Consultas
 
-Criar gráficos adicionais:
+Estudar conceitos de bancos de dados NoSQL para comparação
 
-Matriz com exibição percentual
 
-Colunas agrupadas para comparações visuais
-
-Desenvolver medidas e colunas calculadas usando fórmulas DAX otimizadas.
-
-Organizar todos os elementos (gráficos, medidas, filtros) em categorias e pastas para facilitar a navegação.
